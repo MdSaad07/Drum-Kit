@@ -1,38 +1,46 @@
-var numberOfDrumButtons = document.querySelectorAll(".drum").length;
-for (var i=0; i<numberOfDrumButtons; i++){
-    document.querySelectorAll(".drum")[i].addEventListener("click", function(){
-    var buttonInnerHTML = this.innerHTML;
-    switch(buttonInnerHTML){
+// Detecting Button Press
+var drumButtons = document.querySelectorAll(".drum");
+
+for (var i = 0; i < drumButtons.length; i++) {
+    drumButtons[i].addEventListener("click", function () {
+        var buttonInnerHTML = this.innerHTML;
+        makeSound(buttonInnerHTML);
+    });
+}
+
+// Detecting Keyboard Press
+document.addEventListener("keydown", function (event) {
+    makeSound(event.key);
+});
+
+function makeSound(key) {
+    var audioFile = "";
+    switch (key) {
         case "w":
-            var audio = new Audio("sounds/tom-1.mp3");
-            audio.play();
+            audioFile = "sounds/tom-1.mp3";
             break;
         case "a":
-            var audio = new Audio("sounds/tom-2.mp3");
-            audio.play();
+            audioFile = "sounds/tom-2.mp3";
             break;
         case "s":
-            var audio = new Audio("sounds/tom-3.mp3");
-            audio.play();
+            audioFile = "sounds/tom-3.mp3";
             break;
         case "d":
-            var audio = new Audio("sounds/tom-4.mp3");
-            audio.play();
+            audioFile = "sounds/tom-4.mp3";
             break;
         case "j":
-            var audio = new Audio("sounds/snare.mp3");
-            audio.play();
+            audioFile = "sounds/snare.mp3";
             break;
         case "k":
-            var audio = new Audio("sounds/crash.mp3");
-            audio.play();
+            audioFile = "sounds/crash.mp3";
             break;
         case "l":
-            var audio = new Audio("sounds/kick-bass.mp3");
-            audio.play();
+            audioFile = "sounds/kick-bass.mp3";
             break;
         default:
-            console.log(buttonInnerHTML);
+            console.log("Invalid key:", key);
+            return;
     }
-    });}
-
+    var audio = new Audio(audioFile);
+    audio.play();
+}
